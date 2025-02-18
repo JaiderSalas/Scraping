@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+import json
 import urllib.request
 import cssutils
 import logging
@@ -84,8 +85,51 @@ def print_styles(styles_by_tag):
         print("-" * 20)
 
 def main():
-    baseurl = input("Ingrese la URL: ")
-    all_styles = Scraping(baseurl)
-    print_styles(all_styles)
+    all_styles = {}
+    URLS = [
+        "https://www.google.com",
+        "https://www.instagram.com",
+        "https://www.youtube.com",
+        "https://www.twitter.com",
+        "https://www.linkedin.com",
+        "https://www.netflix.com",
+        "https://www.spotify.com",
+        "https://www.amazon.com",
+        "https://www.ebay.com",
+        "https://www.apple.com",
+        "https://www.microsoft.com",
+        "https://www.wikipedia.org",
+        "https://www.wordpress.org",
+        "https://www.blogger.com",
+        "https://www.w3schools.com",
+        "https://www.stackoverflow.com",
+        "https://www.github.com",
+        "https://www.gitlab.com",
+        "https://www.bitbucket.org",
+        "https://www.heroku.com",
+        "https://www.digitalocean.com",
+        "https://www.ibm.com",
+        "https://www.nvidia.com",
+        "https://www.samsung.com",
+        "https://www.lg.com",
+        "https://www.philips.com",
+        "https://www.nokia.com",
+        "https://www.xiaomi.com",
+        "https://www.oneplus.com",
+        "https://www.asus.com",
+        "https://www.lenovo.com",
+        "https://www.hp.com",
+        "https://co.computrabajo.com"
+    ]
+    for url in URLS:
+        print(f"Scraping {url}")
+        styles = Scraping(url)
+        if styles:
+            all_styles[url] = styles
+        else: continue
+    with open('data.json', 'w') as file:
+        json.dump(all_styles, file, indent=4)
+    
+    
     
 main()
